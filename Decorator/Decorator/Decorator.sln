@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decorator", "Decorator.csproj", "{D57F9A5D-053C-4785-B279-FE7C35CECFEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationService", "..\CalculationService\CalculationService.csproj", "{A094576C-2F5A-4D31-8959-61515EE51FF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D57F9A5D-053C-4785-B279-FE7C35CECFEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D57F9A5D-053C-4785-B279-FE7C35CECFEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D57F9A5D-053C-4785-B279-FE7C35CECFEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D57F9A5D-053C-4785-B279-FE7C35CECFEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A094576C-2F5A-4D31-8959-61515EE51FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A094576C-2F5A-4D31-8959-61515EE51FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A094576C-2F5A-4D31-8959-61515EE51FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A094576C-2F5A-4D31-8959-61515EE51FF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02667AAF-B2EC-4E35-BD8A-3A66920AFDE1}
+	EndGlobalSection
+EndGlobal
