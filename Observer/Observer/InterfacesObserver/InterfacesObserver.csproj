@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3D91031-A6CB-47D6-8199-692736DE26B3}</ProjectGuid>
+    <ProjectGuid>{3804695A-9B5D-493F-8024-F2B1F75BB9CC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Observer</RootNamespace>
-    <AssemblyName>Observer</AssemblyName>
+    <RootNamespace>InterfacesObserver</RootNamespace>
+    <AssemblyName>InterfacesObserver</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,7 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleData.cs" />
     <Compile Include="Stock.cs" />
-    <Compile Include="StockChangeEventArgs.cs" />
     <Compile Include="StockTicker.cs" />
   </ItemGroup>
   <ItemGroup>

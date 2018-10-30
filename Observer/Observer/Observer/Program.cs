@@ -4,12 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Observer
+namespace Net.Mentoring.Patterns.EventObserver
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            // Monitor a stock ticker, when particular events occur, react
+            StockTicker st = new StockTicker();
+
+            // Create New observers to listen to the stock ticker
+            GoogleMonitor gf = new GoogleMonitor(st);
+            MicrosoftMonitor mf = new MicrosoftMonitor(st);
+
+            // Load the Sample Stock Data
+            foreach (var s in SampleData.getNext())
+                st.Stock = s;
         }
     }
 }

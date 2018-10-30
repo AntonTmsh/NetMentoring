@@ -16,7 +16,8 @@ namespace Net.Mentoring.Patterns.ConsoleObserver
             do
             {
                 conReader.InputString = Console.ReadLine();
-            } while (conReader.Flag);
+            }
+            while (conReader.Flag);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Net.Mentoring.Patterns.EventObserver
+namespace Net.Mentoring.Patterns.IObserver
 {
     class SampleData
     {
