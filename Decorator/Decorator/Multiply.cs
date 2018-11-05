@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Epam.NetMentoring.Calculator
 {
-    class Multiply : BinaryOperation
+    public class Multiply : BinaryOperation
     {
         public Multiply(IOperation operator1, IOperation operator2) : base(operator1, operator2)
         {
@@ -14,7 +14,7 @@ namespace Epam.NetMentoring.Calculator
         }
         public override double GetResult()
         {
-            return _operator1.GetResult() * _operator2.GetResult();
+            return _leftOperand.GetResult() * _rightOperand.GetResult();
         }
     }
 }

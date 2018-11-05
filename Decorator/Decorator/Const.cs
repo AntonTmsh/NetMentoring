@@ -8,7 +8,7 @@ namespace Epam.NetMentoring.Calculator
 {
     public class Const : IOperation
     {
-        readonly double _const;
+        private readonly double _const;
         public Const(double value)
         {
             _const = value;

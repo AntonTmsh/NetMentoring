@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Epam.NetMentoring.CalculationService
 {
-    class CalculationServiceWithCache : CalculationService
+    public class CalculationServiceWithCache : CalculationService
     {
         IDictionary<string, decimal> _cache = new Dictionary<string, decimal>();
 

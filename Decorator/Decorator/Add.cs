@@ -15,7 +15,7 @@ namespace Epam.NetMentoring.Calculator
         }
         public override double GetResult()
         {
-            return _operator1.GetResult() + _operator2.GetResult();
+            return _leftOperand.GetResult() + _rightOperand.GetResult();
         }
     }
 }

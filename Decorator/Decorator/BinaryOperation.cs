@@ -8,12 +8,14 @@ namespace Epam.NetMentoring.Calculator
 {
     public abstract class BinaryOperation : IOperation
     {
-        protected IOperation _operator1;
-        protected IOperation _operator2;
-        protected BinaryOperation (IOperation operator1, IOperation operator2)
+        protected IOperation _leftOperand;
+        protected IOperation _rightOperand;
+        protected BinaryOperation (IOperation leftOperand, IOperation rightOperand)
         {
-            _operator1 = operator1;
-            _operator2 = operator2;
+            if (leftOperand == null || rightOperand== null)
+                throw new ArgumentNullException(); 
+            _leftOperand = leftOperand;
+            _rightOperand = rightOperand;
         }
         public abstract double GetResult();
 
