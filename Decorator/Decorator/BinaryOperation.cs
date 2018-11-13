@@ -12,8 +12,10 @@ namespace Epam.NetMentoring.Calculator
         protected IOperation _rightOperand;
         protected BinaryOperation (IOperation leftOperand, IOperation rightOperand)
         {
-            if (leftOperand == null || rightOperand== null)
-                throw new ArgumentNullException(); 
+            if (leftOperand == null)
+                throw new ArgumentNullException(nameof(leftOperand));
+            if (rightOperand == null)
+                throw new ArgumentNullException(nameof(rightOperand));
             _leftOperand = leftOperand;
             _rightOperand = rightOperand;
         }

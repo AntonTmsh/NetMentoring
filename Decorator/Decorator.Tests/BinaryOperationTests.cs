@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Epam.NetMentoring.Calculator;
 using NUnit.Framework;
 
-namespace Decorator.Tests
+namespace Epam.NetMentoring.Decorator.Tests
 {
     [TestFixture]
     public class BinaryOperationTests
@@ -49,6 +49,18 @@ namespace Decorator.Tests
             var result = new Multiply(new Add(new Const(10), new Const(5)), new Divide(new Sub(new Const(20), new Const(5)), new Const(3))).GetResult();
 
             Assert.That(result, Is.EqualTo(75));
+        }
+
+        [Test]
+        public void ShouldThrowArgumentNullException()
+        {
+            Assert.That(()=> new Multiply(null, new Const(5)).GetResult(),Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void ShouldThrowDivideByZeroException()
+        {
+            Assert.That(() => new Divide(new Const(5), new Const(0)).GetResult(), Throws.TypeOf<DivideByZeroException>());
         }
     }
 }
