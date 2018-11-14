@@ -31,5 +31,15 @@ namespace Decorator.Tests
 
             Assert.That(result, Is.EqualTo(expectedResult + 10));
         }
+
+        [Test]
+        public void ShouldCheckCalculationDecoratedWithCorrection()
+        {
+            var calculationService = new CalculationServiceWithCache();
+            var sut = new CalculationServiceWithCacheDecorated(calculationService);
+            var result = sut.Calculate(2, 3);
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
     }
 }

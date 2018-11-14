@@ -48,6 +48,7 @@
     <Compile Include="CalculationServiceDecorator.cs" />
     <Compile Include="CalculationServiceWithCache.cs" />
     <Compile Include="CalculationService.cs" />
+    <Compile Include="CalculationServiceWithCacheDecorated.cs" />
     <Compile Include="CalculationServiceWithCorrection.cs" />
     <Compile Include="ICalculationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
