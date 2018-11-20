@@ -7,8 +7,7 @@ namespace Epam.NetMentoring.Factory
         private static void Main(string[] args)
         {
             var trades = TradeInitializer.TradeInitialize();
-            IFilterFactory factory;
-            factory = new FilterFactory();
+            var factory = new FilterFactory();
             IFilter filter = factory.CreateFilter(FilterFactory.ConnacordFilter);
             Console.WriteLine($"Created {FilterFactory.ConnacordFilter} filter");
             var filteredTrades = filter.Match(trades);
