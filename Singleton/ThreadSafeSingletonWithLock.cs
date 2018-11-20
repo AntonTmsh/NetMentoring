@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.NetMentoring.Singleton
 {
-    class ThreadSafeSingletonWithLock
+    internal class ThreadSafeSingletonWithLock
     {
         private static volatile ThreadSafeSingletonWithLock instance;
         private static object lockObject = new Object();
@@ -22,7 +18,9 @@ namespace Epam.NetMentoring.Singleton
                     lock (lockObject)
                     {
                         if (instance == null)
+                        {
                             instance = new ThreadSafeSingletonWithLock();
+                        }
                     }
                 }
 
