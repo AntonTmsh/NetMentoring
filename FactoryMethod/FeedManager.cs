@@ -10,7 +10,7 @@ namespace Epam.NetMentoring.FactoryMethod
         {
             foreach (var item in feeditems)
             {
-                FeedProcessor.Validate(item);
+                FeedProcessor.SaveErrors(FeedProcessor.Validate(item));
                 FeedProcessor.Save(FeedProcessor.Match(item));
             }
         }

@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.NetMentoring.FactoryMethod
 {
     public class FeedManagerFactory : IFeedManagerFactory
     {
+        internal const string DeltaOneFeedType = "DeltaOne";
+        internal const string EMFeedType = "EM";
+
         public FeedManager CreateFeedManager(string feedType)
         {
-            if (feedType == "DeltaOne")
+            if (feedType == DeltaOneFeedType)
             {
                 return new DeltaOneFeedManager();
             }
-            else if (feedType == "EM")
+            else if (feedType == EMFeedType)
             {
                 return new EMFeedManager();
             }
-            throw new Exception("Unsupported feed type");
+            throw new ArgumentException($"{ feedType } unknow / not - supported");
         }
     }
 }

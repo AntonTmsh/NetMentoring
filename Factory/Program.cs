@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.NetMentoring.Factory
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var trade = new List<Trade> { new Trade(12, "Future", "test") };
+            var trades = TradeInitializer.TradeInitialize();
             IFilterFactory factory;
             factory = new FilterFactory();
-            IFilter filter = factory.CreateFilter("Connacord");
-            filter.Match(trade);
+            IFilter filter = factory.CreateFilter(FilterFactory.ConnacordFilter);
+            Console.WriteLine($"Created {FilterFactory.ConnacordFilter} filter");
+            var filteredTrades = filter.Match(trades);
+            foreach (var trade in filteredTrades)
+            {
+                Console.WriteLine($"Filtered trade amount: {trade.Amount}, type: {trade.Type}, sybType: {trade.SybType}");
+            }
+            Console.ReadKey();
         }
     }
 }

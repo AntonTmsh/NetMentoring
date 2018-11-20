@@ -1,35 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.NetMentoring.FactoryMethod
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            List<List<FeedItem>> listOfFeeds = new List<List<FeedItem>>();
+            List<List<FeedItem>> listOfFeeds = FeedInitializer.FeedInitialize();
             var managerFactory = new FeedManagerFactory();
             foreach (List<FeedItem> feeds in listOfFeeds)
             {
-                var feedmanager =  managerFactory.CreateFeedManager(CheckFeedType(feeds));
+                var feedmanager = managerFactory.CreateFeedManager(CheckFeedType(feeds));
                 feedmanager.Process(feeds);
+                Console.ReadKey();
             }
         }
 
         private static string CheckFeedType(List<FeedItem> feed)
         {
-            var item = feed.First();
+            var item = feed.FirstOrDefault();
 
             if (item.GetType() == typeof(EmFeed))
             {
-                return "EM";
+                return FeedManagerFactory.EMFeedType;
             }
             if (item.GetType() == typeof(DeltaOneFeed))
             {
-                return "DeltaOne";
+                return FeedManagerFactory.DeltaOneFeedType;
             }
             return "Unknown Type";
         }

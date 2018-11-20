@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Epam.NetMentoring.Factory
+﻿namespace Epam.NetMentoring.Factory
 {
     public class FilterFactory : IFilterFactory
     {
+        internal const string BofaFilter = "BOFA";
+        internal const string ConnacordFilter = "Connacord";
+        internal const string BarclaysFilter = "Barclays";
         public virtual IFilter CreateFilter(string filtername)
         {
+
             switch (filtername)
             {
-                case "BOFA":
-                    return new BOFA_Filter();
-                case "Connacord":
-                    return new Connacord_Filter();
-                case "Barclays":
-                    return new Barclays_Filter();
+                case BofaFilter:
+                    return new BOFAFilter();
+                case ConnacordFilter:
+                    return new ConnacordFilter();
+                case BarclaysFilter:
+                    return new BarclaysFilter();
                 default:
-                    return new Default_Filter();
+                    return new DefaultFilter();
             }
         }
     }

@@ -5,6 +5,7 @@ namespace Epam.NetMentoring.FactoryMethod
 {
     internal class DeltaOneFeedProcessor : IFeedProcessor
     {
+        private List<ValidationError> _validationerror = new List<ValidationError>();
         public FeedItem Match(FeedItem feeditem)
         {
             Account.GetAccount(feeditem.CounterpartyId + feeditem.PrincipalId);
@@ -27,16 +28,31 @@ namespace Epam.NetMentoring.FactoryMethod
         public IEnumerable<ValidationError> Validate(FeedItem feeditem)
         {
             if (feeditem.GetType() != typeof(DeltaOneFeed))
+            {
                 throw new Exception("Incorrect type detected");
+            }
+
             if (feeditem.CounterpartyId == default(int))
-                ValidationError.AddValidationError(new ValidationError(((DeltaOneFeed)feeditem).FeedItemId, "CounterpartyId is empty!"));
+            {
+                _validationerror.Add(new ValidationError(((DeltaOneFeed)feeditem).FeedItemId, "CounterpartyId is empty!"));
+            }
+
             if (feeditem.PrincipalId == default(int))
-                ValidationError.AddValidationError(new ValidationError(((DeltaOneFeed)feeditem).FeedItemId, "PrincipalId is empty!"));
+            {
+                _validationerror.Add(new ValidationError(((DeltaOneFeed)feeditem).FeedItemId, "PrincipalId is empty!"));
+            }
+
             if (((DeltaOneFeed)feeditem).Isin == default(int))
-                ValidationError.AddValidationError(new ValidationError(((DeltaOneFeed)feeditem).FeedItemId, "Isin is empty!"));
+            {
+                _validationerror.Add(new ValidationError(((DeltaOneFeed)feeditem).FeedItemId, "Isin is empty!"));
+            }
+
             if (((DeltaOneFeed)feeditem).MaturityDate == default(DateTime))
-                ValidationError.AddValidationError(new ValidationError(((DeltaOneFeed)feeditem).FeedItemId, "MaturityDate is empty!"));
-            return ValidationError.GetValidationError();
+            {
+                _validationerror.Add(new ValidationError(((DeltaOneFeed)feeditem).FeedItemId, "MaturityDate is empty!"));
+            }
+
+            return _validationerror;
         }
     }
 }

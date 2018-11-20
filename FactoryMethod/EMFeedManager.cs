@@ -2,6 +2,6 @@
 {
     internal class EMFeedManager : FeedManager
     {
-        public override IFeedProcessor FeedProcessor {get => new EMFeedProcessor(); }
+        public override IFeedProcessor FeedProcessor { get => new EMFeedProcessor(); }
     }
 }

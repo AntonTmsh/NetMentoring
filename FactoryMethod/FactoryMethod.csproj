@@ -47,6 +47,7 @@
     <Compile Include="DeltaOneFeedManager.cs" />
     <Compile Include="EMFeedManager.cs" />
     <Compile Include="EMFeedProcessor.cs" />
+    <Compile Include="FeedInitializer.cs" />
     <Compile Include="FeedItem.cs" />
     <Compile Include="FeedManager.cs" />
     <Compile Include="FeedManagerFactory.cs" />

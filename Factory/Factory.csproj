@@ -42,16 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Barclays_Filter.cs" />
-    <Compile Include="BOFA_Filter.cs" />
-    <Compile Include="Connacord_Filter.cs" />
-    <Compile Include="Default_Filter.cs" />
+    <Compile Include="BarclaysFilter.cs" />
+    <Compile Include="BOFAFilter.cs" />
+    <Compile Include="ConnacordFilter.cs" />
+    <Compile Include="DefaultFilter.cs" />
     <Compile Include="FilterFactory.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="IFilterFactory.cs" />
     <Compile Include="Trade.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TradeInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
