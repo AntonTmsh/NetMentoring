@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Net.Mentoring.Patterns.IObserver
+﻿namespace Net.Mentoring.Patterns.IObserver
 {
     public class Program
     {
@@ -21,7 +15,9 @@ namespace Net.Mentoring.Patterns.IObserver
             {
                 // Load the Sample Stock Data
                 foreach (var s in SampleData.getNext())
+                {
                     st.Stock = s;
+                }
             }
 
         }

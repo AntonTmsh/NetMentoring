@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Net.Mentoring.Patterns.EventObserver
 {
-    class StockTicker
+    internal class StockTicker
     {
         private Stock stock;
         public Stock Stock

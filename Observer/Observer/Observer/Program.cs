@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Net.Mentoring.Patterns.EventObserver
+﻿namespace Net.Mentoring.Patterns.EventObserver
 {
     public class Program
     {
@@ -19,7 +13,9 @@ namespace Net.Mentoring.Patterns.EventObserver
 
             // Load the Sample Stock Data
             foreach (var s in SampleData.getNext())
+            {
                 st.Stock = s;
+            }
         }
     }
 }

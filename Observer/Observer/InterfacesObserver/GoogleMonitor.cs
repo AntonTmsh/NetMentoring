@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Net.Mentoring.Patterns.IObserver
 {
-    class GoogleMonitor : IObserver<Stock>
+    internal class GoogleMonitor : IObserver<Stock>
     {
         public void OnCompleted()
         {
@@ -20,7 +17,9 @@ namespace Net.Mentoring.Patterns.IObserver
         public void OnNext(Stock value)
         {
             if (value.Symbol == "GOOG")
+            {
                 Console.WriteLine("Google's new price is: {0}", value.Price);
+            }
         }
     }
 }

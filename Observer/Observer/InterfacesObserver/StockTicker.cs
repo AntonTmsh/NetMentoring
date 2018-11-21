@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Net.Mentoring.Patterns.IObserver
 {
-    class StockTicker : IObservable<Stock>
+    internal class StockTicker : IObservable<Stock>
     {
-        List<IObserver<Stock>> observers = new List<IObserver<Stock>>();
+        private List<IObserver<Stock>> observers = new List<IObserver<Stock>>();
 
         private Stock stock;
         public Stock Stock
@@ -25,23 +23,35 @@ namespace Net.Mentoring.Patterns.IObserver
             foreach (var o in observers)
             {
                 if (s.Symbol == null || s.Price < 0)
+                {
                     o.OnError(new Exception("Bad Stock Data"));
+                }
                 else
+                {
                     o.OnNext(s);
+                }
             }
         }
         private void Stop()
         {
             foreach (var observer in observers.ToArray())
+            {
                 if (observers.Contains(observer))
+                {
                     observer.OnCompleted();
+                }
+            }
+
             observers.Clear();
         }
 
         public IDisposable Subscribe(IObserver<Stock> observer)
         {
             if (!observers.Contains(observer))
+            {
                 observers.Add(observer);
+            }
+
             return new Unsubscriber(observers, observer);
         }
 
@@ -59,7 +69,9 @@ namespace Net.Mentoring.Patterns.IObserver
             public void Dispose()
             {
                 if (_observer != null && _observers.Contains(_observer))
+                {
                     _observers.Remove(_observer);
+                }
             }
         }
     }

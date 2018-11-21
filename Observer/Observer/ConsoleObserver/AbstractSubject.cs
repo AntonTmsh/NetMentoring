@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Net.Mentoring.Patterns.ConsoleObserver
 {
     public abstract class AbstractSubject
     {
-        List<AbstractObserver> observers = new List<AbstractObserver>();
+        private List<AbstractObserver> observers = new List<AbstractObserver>();
 
         public void Register(AbstractObserver observer)
         {
@@ -23,7 +19,9 @@ namespace Net.Mentoring.Patterns.ConsoleObserver
         public void Notify()
         {
             foreach (var o in observers)
+            {
                 o.Update();
+            }
         }
     }
 }
