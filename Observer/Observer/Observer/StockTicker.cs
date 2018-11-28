@@ -4,14 +4,15 @@ namespace Net.Mentoring.Patterns.EventObserver
 {
     internal class StockTicker
     {
-        private Stock stock;
+        private Stock _stock;
+
         public Stock Stock
         {
-            get { return stock; }
+            get => _stock;
             set
             {
-                stock = value;
-                this.OnStockChange(new StockChangeEventArgs(this.stock));
+                _stock = value;
+                OnStockChange(new StockChangeEventArgs(_stock));
             }
         }
 
@@ -19,10 +20,7 @@ namespace Net.Mentoring.Patterns.EventObserver
 
         protected virtual void OnStockChange(StockChangeEventArgs e)
         {
-            if (StockChange != null)
-            {
-                StockChange(this, e);
-            }
+            StockChange?.Invoke(this, e);
         }
     }
 }

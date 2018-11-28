@@ -6,9 +6,9 @@ namespace Net.Mentoring.Patterns.EventObserver
     {
         public StockChangeEventArgs(Stock s)
         {
-            this.Stock = s;
+            Stock = s;
         }
+
         public Stock Stock { get; set; }
     }
-
 }

@@ -2,16 +2,17 @@
 {
     public class ConsoleReader : AbstractSubject
     {
-        private string inputString;
+        private string _inputString;
         public bool Flag { get; set; }
 
         public string InputString
         {
-            get { return inputString; }
+            get => _inputString;
             set
             {
-                inputString = value;
-                this.Notify();
+                _inputString = value;
+                if (_inputString == "quit")
+                    this.Notify();
             }
         }
 

@@ -1,25 +1,19 @@
-﻿namespace Net.Mentoring.Patterns.IObserver
+﻿namespace Net.Mentoring.Patterns.InterfaceObserver
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            // Monitor a stock ticker, when particular events occur, react
-            StockTicker st = new StockTicker();
+            var st = new StockTicker();
 
-            GoogleMonitor gf = new GoogleMonitor();
-            MicrosoftMonitor mf = new MicrosoftMonitor();
+            var gf = new GoogleMonitor();
+            var mf = new MicrosoftMonitor();
 
             using (st.Subscribe(gf))
             using (st.Subscribe(mf))
             {
-                // Load the Sample Stock Data
-                foreach (var s in SampleData.getNext())
-                {
-                    st.Stock = s;
-                }
+                foreach (var s in SampleData.getNext()) st.Stock = s;
             }
-
         }
     }
 }

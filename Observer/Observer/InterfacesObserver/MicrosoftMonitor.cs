@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Net.Mentoring.Patterns.IObserver
+namespace Net.Mentoring.Patterns.InterfaceObserver
 {
     internal class MicrosoftMonitor : IObserver<Stock>
     {

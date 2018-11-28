@@ -6,7 +6,7 @@ namespace Net.Mentoring.Patterns.EventObserver
     {
         public GoogleMonitor(StockTicker st)
         {
-            st.StockChange += new EventHandler<StockChangeEventArgs>(st_StockChange);
+            st.StockChange += st_StockChange;
         }
 
         private void st_StockChange(object sender, StockChangeEventArgs e)

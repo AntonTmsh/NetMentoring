@@ -4,24 +4,21 @@ namespace Net.Mentoring.Patterns.ConsoleObserver
 {
     public abstract class AbstractSubject
     {
-        private List<AbstractObserver> observers = new List<AbstractObserver>();
+        private readonly List<IAbstractObserver> _observers = new List<IAbstractObserver>();
 
-        public void Register(AbstractObserver observer)
+        public void Register(IAbstractObserver observer)
         {
-            observers.Add(observer);
+            _observers.Add(observer);
         }
 
-        public void Unregister(AbstractObserver observer)
+        public void Unregister(IAbstractObserver observer)
         {
-            observers.Remove(observer);
+            _observers.Remove(observer);
         }
 
         public void Notify()
         {
-            foreach (var o in observers)
-            {
-                o.Update();
-            }
+            foreach (var o in _observers) o.Update();
         }
     }
 }

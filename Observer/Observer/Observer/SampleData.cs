@@ -10,9 +10,11 @@ namespace Net.Mentoring.Patterns.EventObserver
         {
             for (int i = 0; i < samplePrices.Length; i++)
             {
-                Stock s = new Stock();
-                s.Symbol = sampleStocks[i];
-                s.Price = samplePrices[i];
+                Stock s = new Stock
+                {
+                    Symbol = sampleStocks[i],
+                    Price = samplePrices[i]
+                };
                 yield return s;
             }
         }

@@ -6,9 +6,9 @@ namespace Net.Mentoring.Patterns.ConsoleObserver
     {
         private static void Main(string[] args)
         {
-            ConsoleReader conReader = new ConsoleReader();
-            EventObserver eventObserver = new EventObserver(conReader);
-            Console.WriteLine("Inpute quit to stop");
+            var conReader = new ConsoleReader();
+            var eventObserver = new EventObserver(conReader);
+            Console.WriteLine("Inpute quit (case-sensitive) to stop");
             do
             {
                 conReader.InputString = Console.ReadLine();
