@@ -1,4 +1,4 @@
-﻿namespace Net.Mentoring.Patterns.InterfaceObserver
+﻿namespace Net.Mentoring.Patterns.NetInterfacesObserver
 {
     public class Program
     {

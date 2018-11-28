@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventObserver", "Observer\E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleObserver", "ConsoleObserver\ConsoleObserver.csproj", "{69D6B46A-7A36-4D22-AD87-DEE62A5B02CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesObserver", "InterfacesObserver\InterfacesObserver.csproj", "{3804695A-9B5D-493F-8024-F2B1F75BB9CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetInterfacesObserver", "InterfacesObserver\NetInterfacesObserver.csproj", "{3804695A-9B5D-493F-8024-F2B1F75BB9CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateObserver", "DelegateObserver\DelegateObserver.csproj", "{0000860B-4DFD-40F2-8981-C65FF230FA05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceObserver", "InterfaceObserver\InterfaceObserver.csproj", "{F7283DA1-F6A1-4D9D-A805-1914CBFB4973}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0000860B-4DFD-40F2-8981-C65FF230FA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0000860B-4DFD-40F2-8981-C65FF230FA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0000860B-4DFD-40F2-8981-C65FF230FA05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7283DA1-F6A1-4D9D-A805-1914CBFB4973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7283DA1-F6A1-4D9D-A805-1914CBFB4973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7283DA1-F6A1-4D9D-A805-1914CBFB4973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7283DA1-F6A1-4D9D-A805-1914CBFB4973}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

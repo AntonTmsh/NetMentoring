@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Net.Mentoring.Patterns.InterfaceObserver
+namespace Net.Mentoring.Patterns.NetInterfacesObserver
 {
     internal class StockTicker : IObservable<Stock>
     {

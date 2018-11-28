@@ -1,4 +1,4 @@
-﻿namespace Net.Mentoring.Patterns.NetInterfacesObserver
+﻿namespace Net.Mentoring.Patterns.InterfaceObserver
 {
     public class Stock
     {

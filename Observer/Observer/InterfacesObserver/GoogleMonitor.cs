@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Net.Mentoring.Patterns.InterfaceObserver
+namespace Net.Mentoring.Patterns.NetInterfacesObserver
 {
     internal class GoogleMonitor : IObserver<Stock>
     {
