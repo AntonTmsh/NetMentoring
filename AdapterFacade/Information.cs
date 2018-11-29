@@ -9,7 +9,7 @@ namespace Epam.NetMentoring.AdapterFacade
 
         public Information(List<T> list)
         {
-            _list = list ?? throw new ArgumentNullException("Cannot create Information class");
+            _list = list ?? throw new ArgumentNullException(nameof(list));
         }
 
         public IEnumerable<T> GetElements()
