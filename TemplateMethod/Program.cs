@@ -1,27 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.NetMentoring.Adapter.TemplateMethod
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var template = new Template
             {
-                Name = "Test",
+                Name = "TestTemplate",
                 CustomerName = "TestCustomer",
                 Email = new List<string>() { "test@test.com" },
-                isRegistered = true,
+                IsRegistered = true,
                 MsgContent = "Hello",
-                User = new List<string>() { "TestUser" }
+                AllowedUserIds = new int[] { 1, 3, 5, 7, 9 }
+        };
+
+            var validUser = new User
+            {
+                UserName = "ValidTestUser",
+                UserId = 1
             };
 
-            var verification = new CompanyEmailVerification(template);
+            var verification = new CompanyEmailVerification(template, validUser);
             verification.Verification();
+            Console.ReadKey();
+
+
+            var invalidUser = new User
+            {
+                UserName = "InvalidTestUser1",
+                UserId = 100
+            };
+
+            verification = new CompanyEmailVerification(template, invalidUser);
+            verification.Verification();
+            Console.ReadKey();
         }
     }
 }
