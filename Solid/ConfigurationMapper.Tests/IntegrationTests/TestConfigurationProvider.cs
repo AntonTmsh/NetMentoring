@@ -1,20 +1,22 @@
-﻿using Epam.NetMentoring.ConfigurationMapper;
+﻿using System;
+using Epam.NetMentoring.ConfigurationMapper;
 using NUnit.Framework;
 using Epam.NetMentoring;
 using Epam.NetMentoring.ConfigurationTypes;
+using Epam.NetMentoring.ConfigurationMapper.Storage;
 
 namespace ConfigurationMapper.Tests.IntegrationTests
 {
     [TestFixture]
     public class TestConfigurationProvider
     {
-        private string _path = "C:\\Git\\NetMentoring\\Solid\\ConfigurationMapper.Tests\\Data";
+        private readonly string _path = $"{AppDomain.CurrentDomain.BaseDirectory}\\Data";
         private readonly string[] _tags = { "prod", "ny" };
         [Test]
-        public void Get_SetValueInClass_InitializedClass()
+        public void Get_CreateInstanceOfSpecifiedClass_CreatedInstanceWithCorrectConfiguration()
         {
-            var cr = new ConfigurationReader(_path);
-            var cp = new ConfigurationProvider(cr.Read(_tags));
+            var csp = new ConfigurationReader(new EnvironmentConfigsProvider(_path));
+            var cp = new ConfigurationProvider(csp.Read(_tags));
             var config = cp.Get<ServiceSettings>();
  
             Assert.AreEqual(3, config.Port);

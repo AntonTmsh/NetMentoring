@@ -5,47 +5,51 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Epam.NetMentoring.ConfigurationMapper.Contracts;
+using Epam.NetMentoring.ConfigurationMapper.Storage;
 
 namespace Epam.NetMentoring.ConfigurationMapper
 {
-    public class ConfigurationSourceProvider : ISourceProvider
+    public class EnvironmentConfigsProvider : IEnvironmentConfigsProvider
     {
-        private readonly string _path;
-        private const string Extension = "txt";
+        private readonly string _pathToConfigsFolder;
+        private readonly string _extension;
         private const string RequiredFile = "Default";
-        public ConfigurationSourceProvider(string path)
+
+        public EnvironmentConfigsProvider(string pathToConfigsFolder, ConfigFileType configFileType = ConfigFileType.txt)
         {
-            _path = path;
+            _pathToConfigsFolder = pathToConfigsFolder;
+            _extension = configFileType.ToString();
         }
 
-        public IEnumerable<string> GetSource(IEnumerable<string> tags)
+        public IEnumerable<string> GetEnvironmentConfigPaths(IEnumerable<string> environmentTags)
         {
-            if (!tags.Any())
+            if (!environmentTags.Any())
             {
                 throw new ArgumentException("Must be at least one tag");
             }
 
-            if (tags.Any(string.IsNullOrWhiteSpace))
+            if (environmentTags.Any(string.IsNullOrWhiteSpace))
             {
                 throw new ArgumentException("Empty tag do not allowed");
             }
 
-            var fullnames = Directory.GetFiles(_path, $"*.{Extension}") ;
+            var fullnames = Directory.GetFiles(_pathToConfigsFolder, $"*.{_extension}");
             var names = GetFileNames(fullnames);
             if (!names.Contains(RequiredFile))
             {
-                throw new FileNotFoundException($"File {RequiredFile} must be exist in {_path} folder");
+                throw new FileNotFoundException($"File {RequiredFile} must be exist in {_pathToConfigsFolder} folder");
             }
-            var pattern = CreatePattern(tags);
+            var pattern = CreatePattern(environmentTags);
             var namesByTags = names.Where(x => PatternMatch(pattern, x)).OrderBy(x => x);
             var defaultEnum = new[] { RequiredFile };
             var namesByTagsWithDefault = defaultEnum.Concat(namesByTags);
 
             foreach (var nameByTag in namesByTagsWithDefault)
             {
-                yield return $"{_path}\\{nameByTag}.{Extension}";
+                yield return $"{_pathToConfigsFolder}\\{nameByTag}.{_extension}";
             }
         }
+
 
         private IEnumerable<string> GetFileNames(IEnumerable<string> fullnames)
         {
@@ -71,6 +75,5 @@ namespace Epam.NetMentoring.ConfigurationMapper
         {
             return Regex.Match(input, pattern, RegexOptions.IgnoreCase).Success;
         }
-
     }
 }

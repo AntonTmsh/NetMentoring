@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Epam.NetMentoring.ConfigurationMapper;
+using Epam.NetMentoring.ConfigurationMapper.Storage;
 using NUnit.Framework;
 
 namespace ConfigurationMapper.Tests
@@ -7,37 +8,49 @@ namespace ConfigurationMapper.Tests
     [TestFixture]
     public class TestConfigurationSource
     {
-        private string _path = "C:\\Git\\NetMentoring\\Solid\\ConfigurationMapper.Tests\\Data";
-        private readonly string nodeWithNamespane = "Epam.NetMentoring.ServiceSettings.ConnectionString=sqlserver/dba";
-        private string nodeWithoutNamespace = "ServiceSettings.ConnectionString=sqlserver/dba";
-
-        //private ConfigurationReader cr = new ConfigurationReader();
-        private string[] text =
-            File.ReadAllLines("c:\\Git\\NetMentoring\\Solid\\ConfigurationMapper.Tests\\Data\\Default.txt");
-
-        private static readonly string[] _sourceLists =
+        private static readonly string[] ConfigLines =
         {
             "Epam.NetMentoring.ServiceSettings.ConnectionString=sqlserver/dba",
             "ServiceSettings.ConnectionString=sqlserver/dba",
             "Epam.NetMentoring.ServiceSettings.Port=123",
+            "Epam.NetMentoring.ServiceSettings.HostName=",
             "Epam.NetMentoring.ServiceSettings.ConnectionString=oracle/dba"
         };
 
         [Test]
-        public void AddNode_Add5CorrectNode_DicWith5Node()
+        public void Add_AddSomeConfigLinesWithParamValue_HaveCorrectParamValue()
         {
             var cs = new ConfigurationSource();
-            foreach (var list in _sourceLists)
-                cs.AddNode(list);
-            Assert.AreEqual(2, cs.Source.Count);
+            foreach (var line in ConfigLines)
+                cs.Add(line);
+            Assert.AreEqual("sqlserver/dba", cs.GetValue("ServiceSettings", "ConnectionString"));
         }
 
         [Test]
-        public void AddNode_AddOneCorrectNode_DicWithOneNode()
+        public void Add_AddSomeConfigLinesWithParamOverrideValue_HaveCorrectParamOverriddenValue()
         {
             var cs = new ConfigurationSource();
-            cs.AddNode(nodeWithNamespane);
-            Assert.AreEqual(1, cs.Source.Count);
+            foreach (var line in ConfigLines)
+                cs.Add(line);
+            Assert.AreEqual("oracle/dba", cs.GetValue("Epam.NetMentoring.ServiceSettings", "ConnectionString"));
+        }
+
+        [Test]
+        public void Add_AddSomeConfigLinesWithParamEmptyValue_HaveParamEmptyStringValue()
+        {
+            var cs = new ConfigurationSource();
+            foreach (var line in ConfigLines)
+                cs.Add(line);
+            Assert.AreEqual(string.Empty, cs.GetValue("Epam.NetMentoring.ServiceSettings", "HostName"));
+        }
+
+        [Test]
+        public void Add_AddSomeConfigLinesWithParamEmptyValue_HaveParamEmptyStringValue2()
+        {
+            var cs = new ConfigurationSource();
+            foreach (var line in ConfigLines)
+                cs.Add(line);
+            Assert.AreEqual(string.Empty, cs.GetValue("Epam.NetMentoring.ServiceSettings", "HostName"));
         }
     }
 }

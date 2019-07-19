@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using Epam.NetMentoring.ConfigurationMapper.Contracts;
 
 namespace Epam.NetMentoring.ConfigurationMapper
 {
-    public class ConfigurationProvider : IProvider
+    public class ConfigurationProvider : IConfigurationProvider
     {
-        public ConfigurationProvider(IDictionary configs)
+        private readonly IConfigurationSource _sourceConfigurations;
+    
+        public ConfigurationProvider(IConfigurationSource configs)
         {
-            SourceConfigurations = configs;
+            _sourceConfigurations = configs;
         }
-        private IDictionary SourceConfigurations { get; }
-        public T Get<T>()
+
+        public T Get<T>() where T : new()
         {
             var retObject = Activator.CreateInstance<T>();
 
@@ -26,12 +29,8 @@ namespace Epam.NetMentoring.ConfigurationMapper
                     continue;
                 var fullClassName = property.ReflectedType.FullName;
                 var value = string.Empty;
-                if (SourceConfigurations.Contains(fullClassName))
-                {
-                    var sourceConfiguration = (IDictionary) SourceConfigurations[fullClassName];
-                    if (sourceConfiguration.Contains(property.Name))
-                        value = (string) sourceConfiguration[property.Name];
-                }
+
+                value = _sourceConfigurations.GetValue(fullClassName, property.Name);
 
                 if (value == null)
                     continue;
