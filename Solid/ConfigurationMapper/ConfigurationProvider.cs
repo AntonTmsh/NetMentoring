@@ -12,7 +12,7 @@ namespace Epam.NetMentoring.ConfigurationMapper
     
         public ConfigurationProvider(IConfigurationSource configs)
         {
-            _sourceConfigurations = configs;
+            _sourceConfigurations = configs ?? throw new ArgumentException(nameof(configs));
         }
 
         public T Get<T>() where T : new()
@@ -28,9 +28,8 @@ namespace Epam.NetMentoring.ConfigurationMapper
                 if (property.ReflectedType == null)
                     continue;
                 var fullClassName = property.ReflectedType.FullName;
-                var value = string.Empty;
 
-                value = _sourceConfigurations.GetValue(fullClassName, property.Name);
+                var value = _sourceConfigurations.GetValue(fullClassName, property.Name);
 
                 if (value == null)
                     continue;

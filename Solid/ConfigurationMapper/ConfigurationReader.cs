@@ -16,9 +16,9 @@ namespace Epam.NetMentoring.ConfigurationMapper
         private readonly IEnvironmentConfigsProvider _environmentConfigs;
         public ConfigurationReader(IEnvironmentConfigsProvider environmentConfigs, IConfigurationSource configurationSource = null, IFileReader fileReader = null)
         {
-            _configurationSource = configurationSource ?? new ConfigurationSource();
-            _fileReader = fileReader ?? new FileReader();
             _environmentConfigs = environmentConfigs;
+            _configurationSource = configurationSource ?? new ConfigurationSource();
+            _fileReader = fileReader ?? new FileReader();            
         }
 
         public IConfigurationSource Read(IEnumerable<string> environmentNames)

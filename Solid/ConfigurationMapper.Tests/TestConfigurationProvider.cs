@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Epam.NetMentoring.ConfigurationMapper;
+using Epam.NetMentoring.ConfigurationMapper.Contracts;
+using Epam.NetMentoring.ConfigurationMapper.Storage;
 using Epam.NetMentoring.ConfigurationTypes;
 using NUnit.Framework;
 
@@ -9,89 +11,60 @@ namespace ConfigurationMapper.Tests
     [TestFixture]
     public class TestConfigurationProvider
     {
-        private Dictionary<string, Dictionary<string, string>> InitializeSourceConfigsWrongValue()
+        private IConfigurationSource SourceConfigs()
         {
-            var dic = new Dictionary<string, Dictionary<string, string>>
-            {
-                {
-                    "Epam.NetMentoring.ConfigurationTypes.ServiceSettings", new Dictionary<string, string>
-                    {
-                        {"BatchSize", ""},
-                        {"HostName", "Host"}
-                    }
-                }
-            };
-
-            return dic;
+            var sc= new ConfigurationSource();
+            sc.Add("Epam.NetMentoring.ConfigurationTypes.ServiceSettings.ConnectionString=sql/dba");
+            sc.Add("Epam.NetMentoring.ConfigurationTypes.ServiceSettings.Port=1");
+            sc.Add("Epam.NetMentoring.ConfigurationTypes.ServiceSettings.BatchSize=");
+            sc.Add("Epam.NetMentoring.ConfigurationTypes.ServiceSettings.HostName=1");
+            return sc;
         }
 
-        private Dictionary<string, Dictionary<string, string>> InitializeSourceConfigs()
+        [Test]
+        public void Get_CreateInstanceWithIntParameter_CorrectIntParameter()
         {
-            var dic = new Dictionary<string, Dictionary<string, string>>
-            {
-                {
-                    "Epam.NetMentoring.ConfigurationTypes.ServiceSettings", new Dictionary<string, string>
-                    {
-                        {"ConnectionString", "sql/dba"},
-                        {"Port", "1"},
-                        {"BatchSize", ""},
-                        {"HostName", ""}
-                    }
-                },
-                {
-                    "Epam.NetMentoring.ConfigurationTypes.ServiceSettingsWrong",
-                    new Dictionary<string, string> {{"ConnectionString", "###"}, {"Port", "2.1"}}
-                }
-            };
-
-            return dic;
+            var cp = new ConfigurationProvider(SourceConfigs());
+            var someClass = cp.Get<ServiceSettings>();
+            Assert.IsInstanceOf<int>(someClass.BatchSize);
         }
 
-        //[Test]
-        //public void SetParameter_SetValueForEmptyIntParameter_Initialized_Class()
-        //{
-        //    var cp = new ConfigurationProvider(InitializeSourceConfigs());
-        //    var someClass = cp.Get<ServiceSettings>();
-        //    Assert.AreEqual(0, someClass.BatchSize);
-        //}
+        [Test]
+        public void Get_CreateInstanceWithStringParameter_CorrectStringParameter()
+        {
+            var cp = new ConfigurationProvider(SourceConfigs());
+            var someClass = cp.Get<ServiceSettings>();
+            Assert.IsInstanceOf<string>(someClass.ConnectionString);
+        }
 
-        //[Test]
-        //public void SetParameter_SetValueForEmptyStringParameter_Initialized_Class()
-        //{
-        //    var cp = new ConfigurationProvider(InitializeSourceConfigs());
-        //    var someClass = cp.Get<ServiceSettings>();
-        //    Assert.IsNull(someClass.HostName);
-        //}
+        [Test]
+        public void Get_CreateInstanceWithEmptyParameter_SetDefaultValueForParameter()
+        {
+            var cp = new ConfigurationProvider(SourceConfigs());
+            var someClass = cp.Get<ServiceSettings>();
+            Assert.AreEqual(0,someClass.BatchSize);
+        }
 
-        //[Test]
-        //public void SetParameter_SetValueForSpecificIntParameter_GetExeption()
-        //{
-        //    var cp = new ConfigurationProvider(InitializeSourceConfigs());
-        //    Assert.Throws<ArgumentException>(() => cp.Get<ServiceSettingsWrong>());
-        //}
+        [Test]
+        public void Get_CreateInstanceWithIncorrectParameterValue_ThrowArgumentException()
+        {
+            var cp = new ConfigurationProvider(new ConfigurationSource(new []{ "Epam.NetMentoring.ConfigurationTypes.ServiceSettings.Port=string" }));
+            Assert.Throws<ArgumentException>(() => cp.Get<ServiceSettings>());
+        }
 
-        //[Test]
-        //public void SetParameter_SetValueForSpecificIntParameter_Initialized_Class()
-        //{
-        //    var cp = new ConfigurationProvider(InitializeSourceConfigs());
-        //    var someClass = cp.Get<ServiceSettings>();
-        //    Assert.AreEqual(1, someClass.Port);
-        //}
+        [Test]
+        public void Get_CreateInstanceWithIncorrectParameterType_SkipThisParameter()
+        {
+            var cp = new ConfigurationProvider(SourceConfigs());
+            var someClass = cp.Get<ServiceSettings>();
+            Assert.AreEqual(new ServiceSettingsWrong(), someClass.ServiceSettingsWrong);
+        }
 
-        //[Test]
-        //public void SetParameter_SetValueForSpecificStringParameter_Initialized_Class()
-        //{
-        //    var cp = new ConfigurationProvider(InitializeSourceConfigs());
-        //    var someClass = cp.Get<ServiceSettings>();
-        //    Assert.AreEqual("sql/dba", someClass.ConnectionString);
-        //}
+        [Test]
+        public void ConfigurationProvider_CreateConfigurationProviderWithNull_ThrowArgumentException1()
+        {
+            Assert.Throws<ArgumentException>(() => new ConfigurationProvider(null));
+        }
 
-        //[Test]
-        //public void SetParameter_SkipValueForOnlyGetParameter_Initialized_Class()
-        //{
-        //    var cp = new ConfigurationProvider(InitializeSourceConfigsWrongValue());
-        //    var someClass = cp.Get<ServiceSettingsWrong>();
-        //    Assert.IsNull(someClass.HostName);
-        //}
     }
 }

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IEnvironmentMatcher.cs" />
     <Compile Include="EnvironmentConfigsProvider.cs" />
     <Compile Include="ConfigurationProvider.cs" />
     <Compile Include="Contracts\IConfigurationParser.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Model\ConfigParameter.cs" />
     <Compile Include="Storage\ConfigurationSource.cs" />
     <Compile Include="TextConfigParser.cs" />
+    <Compile Include="TextEnvironmentMatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

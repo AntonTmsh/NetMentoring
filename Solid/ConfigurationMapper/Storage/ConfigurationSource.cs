@@ -15,6 +15,14 @@ namespace Epam.NetMentoring.ConfigurationMapper.Storage
             _configurationParser = configurationParser ?? new TextConfigParser();
         }
 
+        public ConfigurationSource(IEnumerable<string> lines,IConfigurationParser configurationParser = null)
+        {
+            _source = new Dictionary<string, Dictionary<string, string>>();
+            _configurationParser = configurationParser ?? new TextConfigParser();
+            foreach (var line in lines)
+                Add(line);
+        }
+
         public string GetValue(string classNameWithNamespace, string parameterName)
         {
             var value = string.Empty;

@@ -13,5 +13,6 @@ namespace Epam.NetMentoring.ConfigurationTypes
         public int Port { get; set; }
         public int BatchSize { get; set; }
         public string HostName { get; set; }
+        public ServiceSettingsWrong ServiceSettingsWrong { get; set; }
     }
 }

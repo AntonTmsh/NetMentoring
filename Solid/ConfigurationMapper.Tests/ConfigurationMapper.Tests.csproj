@@ -49,10 +49,11 @@
     <Compile Include="ConfigurationTypes\ServiceSettings.cs" />
     <Compile Include="ConfigurationTypes\ServiceSettingsWrong.cs" />
     <Compile Include="IntegrationTests\TestConfigurationProvider.cs" />
+    <Compile Include="IntegrationTests\TestEnvironmentConfigsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestConfigurationSource.cs" />
     <Compile Include="TestConfigurationProvider.cs" />
-    <Compile Include="TestEnvironmentConfigsProvider.cs" />
+    <Compile Include="TestTextEnvironmentMatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
