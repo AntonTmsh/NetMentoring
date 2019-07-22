@@ -1,34 +1,29 @@
-﻿using System.Collections;
+﻿using Epam.NetMentoring.ConfigurationMapper.Contracts;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using Epam.NetMentoring.ConfigurationMapper.Contracts;
 
 namespace Epam.NetMentoring.ConfigurationMapper
 {
     public class FileReader : IFileReader
     {
         private const string CommentSymbol = "#";
-        public IEnumerable<string> ReadLine(string pathToConfigFile)
+        public IEnumerable<string> Read(string pathToConfigFile)
         {
             using (var fr = new StreamReader(pathToConfigFile))
             {
                 while (!fr.EndOfStream)
                 {
                     var line = fr.ReadLine();
-                if (ValidateLine(line))
+                if (ValidateConfigString(line))
                     continue;
                 yield return line;
                 }
             }         
         }
-        private bool ValidateLine(string line)
+        private static bool ValidateConfigString(string line)
         {
             line = line.Trim();
-            if (string.IsNullOrWhiteSpace(line) || line.StartsWith(CommentSymbol))
-                return true;
-
-            return false;
+            return string.IsNullOrWhiteSpace(line) || line.StartsWith(CommentSymbol);
         }
     }
 }

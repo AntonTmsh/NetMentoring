@@ -5,10 +5,10 @@ namespace Epam.NetMentoring.ConfigurationMapper.Contracts
     public interface IFileReader
     {
         /// <summary>
-        /// Create a collection of lines from a config file
+        /// Create a collection of string from a config file
         /// </summary>
         /// <param name="pathToConfigFile">Path to a config file</param>
-        /// <returns>Collection of lines from a config file</returns>
-        IEnumerable<string> ReadLine(string pathToConfigFile);
+        /// <returns>Collection of string from a config file</returns>
+        IEnumerable<string> Read(string pathToConfigFile);
     }
 }

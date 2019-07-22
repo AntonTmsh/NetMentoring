@@ -4,6 +4,12 @@ namespace Epam.NetMentoring.ConfigurationMapper.Contracts
 {
     public interface IEnvironmentMatcher
     {
-        IEnumerable<string> Match(IEnumerable<string> fileNames, IEnumerable<string> environmentNames);
+        /// <summary>
+        /// Match a filename to a specific environment
+        /// </summary>
+        /// <param name="fileName">Config file name</param>
+        /// <param name="environmentNames">Environment name</param>
+        /// <returns>True if a file name matched to a specific environment</returns>
+        bool Match(string fileName, IEnumerable<string> environmentNames);
     }
 }

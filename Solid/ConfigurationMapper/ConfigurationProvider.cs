@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 using Epam.NetMentoring.ConfigurationMapper.Contracts;
 
@@ -23,7 +21,7 @@ namespace Epam.NetMentoring.ConfigurationMapper
             var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
             foreach (var property in properties)
             {
-                if (!property.CanWrite || !Convertible(property))
+                if (!Convertible(property))
                     continue;
                 if (property.ReflectedType == null)
                     continue;
@@ -35,14 +33,8 @@ namespace Epam.NetMentoring.ConfigurationMapper
                     continue;
                 try
                 {
-                    if (value == string.Empty)
-                        property.SetValue(retObject, null, null);
-                    else
-                    {
-                        var typedValue = Convert.ChangeType(value, property.PropertyType);
-                        property.SetValue(retObject, typedValue);
-                    }
-
+                    var typedValue = Convert.ChangeType(value, property.PropertyType);
+                    property.SetValue(retObject, typedValue);                  
                 }
                 catch (FormatException e)
                 {

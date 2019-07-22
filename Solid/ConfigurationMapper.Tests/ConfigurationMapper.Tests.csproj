@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestConfigurationSource.cs" />
     <Compile Include="TestConfigurationProvider.cs" />
+    <Compile Include="TestTextConfigParser.cs" />
     <Compile Include="TestTextEnvironmentMatcher.cs" />
   </ItemGroup>
   <ItemGroup>

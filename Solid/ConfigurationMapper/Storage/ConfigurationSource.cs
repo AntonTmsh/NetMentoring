@@ -1,31 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using Epam.NetMentoring.ConfigurationMapper.Contracts;
+using Epam.NetMentoring.ConfigurationMapper.Model;
 
 namespace Epam.NetMentoring.ConfigurationMapper.Storage
 {
     public class ConfigurationSource :IConfigurationSource
     {
         private readonly Dictionary<string, Dictionary<string, string>> _source;
-        private readonly IConfigurationParser _configurationParser;
 
-        public ConfigurationSource(IConfigurationParser configurationParser = null)
+        public ConfigurationSource()
         {
             _source = new Dictionary<string, Dictionary<string, string>>();
-            _configurationParser = configurationParser ?? new TextConfigParser();
         }
 
-        public ConfigurationSource(IEnumerable<string> lines,IConfigurationParser configurationParser = null)
+        public ConfigurationSource(IEnumerable<ConfigParameter> configParams)
         {
             _source = new Dictionary<string, Dictionary<string, string>>();
-            _configurationParser = configurationParser ?? new TextConfigParser();
-            foreach (var line in lines)
-                Add(line);
+            foreach (var param in configParams)
+                Add(param);
         }
 
         public string GetValue(string classNameWithNamespace, string parameterName)
         {
-            var value = string.Empty;
+            string value = null;
             if (_source.ContainsKey(classNameWithNamespace))
             {
                 var sourceConfiguration = _source[classNameWithNamespace];
@@ -36,9 +34,8 @@ namespace Epam.NetMentoring.ConfigurationMapper.Storage
             return value;
         }
 
-        public void Add(string configurationLine)
+        public void Add(ConfigParameter configParam)
         {  
-            var configParam = _configurationParser.Parse(configurationLine);
             if (_source.ContainsKey(configParam.ClassNameWithNamespace))
             {
                 if (_source[configParam.ClassNameWithNamespace].ContainsKey(configParam.Parameter))

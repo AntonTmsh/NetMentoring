@@ -5,10 +5,10 @@ namespace Epam.NetMentoring.ConfigurationMapper.Contracts
     public interface IConfigurationParser
     {
         /// <summary>
-        /// Parse configuration line 
+        /// Parse configuration string
         /// </summary>
-        /// <param name="configLine">String with configuration info</param>
-        /// <returns>ConfigParameter</returns>
-        ConfigParameter Parse(string configLine);
+        /// <param name="configString">String with configuration info which we read from config file</param>
+        /// <returns>ConfigParameter class that contain parse strings as fields</returns>
+        ConfigParameter Parse(string configString);
     }
 }
