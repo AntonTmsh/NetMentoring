@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-using Epam.NetMentoring.ConfigurationMapper;
-using Epam.NetMentoring.ConfigurationTypes;
+﻿using Epam.NetMentoring.ConfigurationMapper;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace ConfigurationMapper.Tests.IntegrationTests
 {

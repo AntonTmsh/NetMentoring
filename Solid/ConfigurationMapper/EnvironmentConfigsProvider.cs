@@ -16,7 +16,7 @@ namespace Epam.NetMentoring.ConfigurationMapper
 
         public EnvironmentConfigsProvider(string pathToConfigsFolder, ConfigFileType configFileType = ConfigFileType.txt, IEnvironmentMatcher environmentMatcher = null)
         {
-            if (String.IsNullOrWhiteSpace(pathToConfigsFolder))
+            if (ValidateConfigsFolder(pathToConfigsFolder))
                 throw new ArgumentException(nameof(pathToConfigsFolder));
             _pathToConfigsFolder = pathToConfigsFolder;
             _extension = configFileType.ToString();
@@ -65,6 +65,11 @@ namespace Epam.NetMentoring.ConfigurationMapper
         private static bool IsRequiredFileExist(IEnumerable<string> names)
         {
             return names.Contains(RequiredFile);
+        }
+
+        private static bool ValidateConfigsFolder(string pathToConfigsFolder)
+        {
+            return string.IsNullOrWhiteSpace(pathToConfigsFolder) || !Directory.Exists(pathToConfigsFolder);
         }
     }
 }

@@ -1,2 +1,3 @@
 Epam.NetMentoring.ConfigurationTypes.ServiceSettings.Port=2
+
 Epam.NetMentoring.ConfigurationTypes.ServiceSettings.BatchSize=2

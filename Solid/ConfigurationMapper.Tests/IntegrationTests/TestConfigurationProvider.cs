@@ -1,9 +1,7 @@
-﻿using System;
-using Epam.NetMentoring.ConfigurationMapper;
-using NUnit.Framework;
-using Epam.NetMentoring;
+﻿using Epam.NetMentoring.ConfigurationMapper;
 using Epam.NetMentoring.ConfigurationTypes;
-using Epam.NetMentoring.ConfigurationMapper.Storage;
+using NUnit.Framework;
+using System;
 
 namespace ConfigurationMapper.Tests.IntegrationTests
 {
