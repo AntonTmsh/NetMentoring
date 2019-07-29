@@ -45,8 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationFileSorter.cs" />
-    <Compile Include="Contracts\IConfigurationFileSorter.cs" />
+    <Compile Include="ConfigurationHierarchyManager.cs" />
+    <Compile Include="Contracts\IConfigurationHierarchyManager.cs" />
     <Compile Include="Contracts\IEnvironmentMatcher.cs" />
     <Compile Include="TextEnvironmentConfigsProvider.cs" />
     <Compile Include="ConfigurationProvider.cs" />

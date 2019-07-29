@@ -1,22 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Epam.NetMentoring.ConfigurationMapper.Contracts;
+using Epam.NetMentoring.ConfigurationMapper.Storage;
 
 namespace Epam.NetMentoring.ConfigurationMapper
 {
     public class ConfigurationProvider : IConfigurationProvider
     {
-        private readonly IConfigurationSource _sourceConfigurations;
+        private readonly IConfigurationSourceManager _configManager;
     
-        public ConfigurationProvider(IConfigurationSource configs)
+        public ConfigurationProvider(IConfigurationSourceManager configManager)
         {
-            _sourceConfigurations = configs ?? throw new ArgumentException(nameof(configs));
+            _configManager = configManager;
         }
 
-        public T Get<T>() where T : new()
+        public T Get<T>(IEnumerable<string> environmentNames, string pathToConfigsFolder, ConfigFileType configFileType) where T : new()
         {
             var retObject = Activator.CreateInstance<T>();
-
+            var configSource = _configManager.GetConfigSource(environmentNames, pathToConfigsFolder, configFileType);
             var type = typeof(T);
             var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
             foreach (var property in properties)
@@ -27,7 +29,7 @@ namespace Epam.NetMentoring.ConfigurationMapper
                     continue;
                 var fullClassName = property.ReflectedType.FullName;
 
-                var value = _sourceConfigurations.GetValue(fullClassName, property.Name);
+                var value = configSource.GetValue(fullClassName, property.Name);
 
                 if (value == null)
                     continue;

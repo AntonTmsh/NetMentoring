@@ -10,8 +10,8 @@ namespace Epam.NetMentoring.ConfigurationMapper
         private readonly IFileReader _fileReader;
         private readonly IEnvironmentConfigsProvider _environmentConfigs;
         private readonly IConfigurationParser _configurationParser;
-        private readonly IConfigurationFileSorter _configurationFileSorter;
-        public ConfigurationSourceManager(IEnvironmentConfigsProvider environmentConfigs, IConfigurationFileSorter configurationFileSorter,
+        private readonly IConfigurationHierarchyManager _configurationFileSorter;
+        public ConfigurationSourceManager(IEnvironmentConfigsProvider environmentConfigs, IConfigurationHierarchyManager configurationFileSorter,
                                                     IConfigurationSource configurationSource, IFileReader fileReader, 
                                                     IConfigurationParser configurationParser)
                                                     
@@ -23,9 +23,9 @@ namespace Epam.NetMentoring.ConfigurationMapper
             _configurationFileSorter = configurationFileSorter;
         }
 
-        public IConfigurationSource GetConfigSource(IEnumerable<string> environmentNames)
+        public IConfigurationSource GetConfigSource(IEnumerable<string> environmentNames, string pathToConfigsFolder, ConfigFileType configFileType)
         {
-            foreach (var path in _configurationFileSorter.Sort(_environmentConfigs.GetEnvironmentConfigFiles(environmentNames)))
+            foreach (var path in _configurationFileSorter.BuildHierarchy(_environmentConfigs.GetEnvironmentConfigFiles(environmentNames, pathToConfigsFolder, configFileType)))
             {
                 foreach (var line in _fileReader.Read(path))
                 {

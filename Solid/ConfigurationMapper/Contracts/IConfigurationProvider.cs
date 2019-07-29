@@ -1,4 +1,7 @@
-﻿namespace Epam.NetMentoring.ConfigurationMapper.Contracts
+﻿using System.Collections.Generic;
+using Epam.NetMentoring.ConfigurationMapper.Storage;
+
+namespace Epam.NetMentoring.ConfigurationMapper.Contracts
 {
     public interface IConfigurationProvider
     {
@@ -7,6 +10,6 @@
         /// </summary>
         /// <typeparam name="T">Instance type</typeparam>
         /// <returns>Instance from T with seted values</returns>
-        T Get<T>() where T:new();
+        T Get<T>(IEnumerable<string> environmentNames, string pathToConfigsFolder, ConfigFileType configFileType) where T:new();
     }
 }

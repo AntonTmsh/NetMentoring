@@ -10,20 +10,14 @@ namespace Epam.NetMentoring.ConfigurationMapper
     public class TextEnvironmentConfigsProvider : IEnvironmentConfigsProvider
     {
         private readonly IEnvironmentMatcher _environmentMatcher;
-        private readonly string _pathToConfigsFolder;
-        private readonly string _extension;
         private const string RequiredFile = "Default";
 
-        public TextEnvironmentConfigsProvider(string pathToConfigsFolder, ConfigFileType configFileType = ConfigFileType.txt, IEnvironmentMatcher environmentMatcher = null)
+        public TextEnvironmentConfigsProvider(IEnvironmentMatcher environmentMatcher)
         {
-            if (ValidateConfigsFolder(pathToConfigsFolder))
-                throw new ArgumentException(nameof(pathToConfigsFolder));
-            _pathToConfigsFolder = pathToConfigsFolder;
-            _extension = configFileType.ToString();
-            _environmentMatcher = environmentMatcher ?? new TextEnvironmentMatcher();
+            _environmentMatcher = environmentMatcher;
         }
 
-        public IEnumerable<string> GetEnvironmentConfigFiles(IEnumerable<string> environmentNames)
+        public IEnumerable<string> GetEnvironmentConfigFiles(IEnumerable<string> environmentNames, string pathToConfigsFolder, ConfigFileType configFileType)
         {
             if (environmentNames == null)
             {
@@ -39,11 +33,11 @@ namespace Epam.NetMentoring.ConfigurationMapper
                 throw new ArgumentException($"Empty {nameof(environmentNames)} do not allowed");
             }
 
-            var fullnames = Directory.EnumerateFiles(_pathToConfigsFolder, $"*.{_extension}");
+            var fullnames = Directory.EnumerateFiles(pathToConfigsFolder, $"*.{configFileType}");
             var names = GetFileNames(fullnames);
             if (!IsRequiredFileExist(names))
             {
-                throw new FileNotFoundException($"File {RequiredFile} must be exist in {_pathToConfigsFolder} folder");
+                throw new FileNotFoundException($"File {RequiredFile} must be exist in {pathToConfigsFolder} folder");
             }
 
             var matchedNames = names.Where(n => _environmentMatcher.Match(n, environmentNames));
@@ -52,7 +46,7 @@ namespace Epam.NetMentoring.ConfigurationMapper
 
             foreach (var nameByTag in namesByTagsWithDefault)
             {
-                yield return $"{_pathToConfigsFolder}\\{nameByTag}.{_extension}";
+                yield return $"{pathToConfigsFolder}\\{nameByTag}.{configFileType}";
             }
         }
 

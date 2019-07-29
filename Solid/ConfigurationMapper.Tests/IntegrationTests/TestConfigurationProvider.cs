@@ -16,10 +16,10 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void Get_CreateInstanceOfSpecifiedClassForEnvironment_CreatedInstanceWithCorrectConfiguration()
         {
-            var csp = new ConfigurationSourceManager(new TextEnvironmentConfigsProvider(_path),new ConfigurationFileSorter(), 
+            var csp = new ConfigurationSourceManager(new TextEnvironmentConfigsProvider(new TextEnvironmentMatcher()),new ConfigurationHierarchyManager(), 
                                                         new ConfigurationSource(), new TextFileReader(), new TextConfigParser());
-            var cp = new ConfigurationProvider(csp.GetConfigSource(_EnvironmentTags));
-            var config = cp.Get<ServiceSettings>();
+            var cp = new ConfigurationProvider(csp);
+            var config = cp.Get<ServiceSettings>(_EnvironmentTags, _path,ConfigFileType.txt);
             Assert.AreEqual(3, config.Port);
             Assert.AreEqual("prodny/dba", config.ConnectionString);
         }
@@ -27,10 +27,10 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void Get_CreateInstanceOfSpecifiedClassForEnvironment2_CreatedInstanceWithCorrectConfiguration()
         {
-            var csp = new ConfigurationSourceManager(new TextEnvironmentConfigsProvider(_path), new ConfigurationFileSorter(),
+            var csp = new ConfigurationSourceManager(new TextEnvironmentConfigsProvider(new TextEnvironmentMatcher()), new ConfigurationHierarchyManager(),
                 new ConfigurationSource(), new TextFileReader(), new TextConfigParser());
-            var cp = new ConfigurationProvider(csp.GetConfigSource(_EnvironmentTags2));
-            var config = cp.Get<ServiceSettings>();
+            var cp = new ConfigurationProvider(csp);
+            var config = cp.Get<ServiceSettings>(_EnvironmentTags2, _path, ConfigFileType.txt);
             Assert.AreEqual(5, config.Port);
             Assert.AreEqual("prodny/dba", config.ConnectionString);
             Assert.AreEqual(2, config.BatchSize);
@@ -38,10 +38,10 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void Get_CreateInstanceOfSpecifiedClassForEnvironment3_CreatedInstanceWithCorrectConfiguration()
         {
-            var csp = new ConfigurationSourceManager(new TextEnvironmentConfigsProvider(_path), new ConfigurationFileSorter(),
+            var csp = new ConfigurationSourceManager(new TextEnvironmentConfigsProvider(new TextEnvironmentMatcher()), new ConfigurationHierarchyManager(),
                 new ConfigurationSource(), new TextFileReader(), new TextConfigParser());
-            var cp = new ConfigurationProvider(csp.GetConfigSource(_EnvironmentTags3));
-            var config = cp.Get<ServiceSettings>();
+            var cp = new ConfigurationProvider(csp);
+            var config = cp.Get<ServiceSettings>(_EnvironmentTags3, _path, ConfigFileType.txt);
             Assert.AreEqual(3, config.Port);
             Assert.AreEqual("prodny/dba", config.ConnectionString);
         }
