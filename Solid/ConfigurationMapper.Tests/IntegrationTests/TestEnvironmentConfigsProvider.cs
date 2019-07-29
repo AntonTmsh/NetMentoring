@@ -9,7 +9,7 @@ namespace ConfigurationMapper.Tests.IntegrationTests
     public class TestEnvironmentConfigsProvider
     {
         private readonly string _path = $"{AppDomain.CurrentDomain.BaseDirectory}\\Data";
-        private readonly string[] _tags = { "prod", "ny" };
+        private readonly string[] _tags = { "prod", "ny" ,"2"};
         [Test]
         public void GetEnvironmentConfigPaths_GetConfigPathsWithDefault_HavePathToDefaultOnFirst()
         {
@@ -22,7 +22,7 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         {
             var ecp = new EnvironmentConfigsProvider(_path);
             var paths = ecp.GetEnvironmentConfigFiles(_tags);
-            Assert.AreEqual(paths,new [] { $"{_path}\\Default.txt", $"{_path}\\PROD.txt", $"{_path}\\PROD-NY-1.txt", $"{_path}\\PROD-NY-2.txt", $"{_path}\\PROD-NY-3.txt" });
+            Assert.That(paths, Is.EquivalentTo(new[] { $"{_path}\\Default.txt", $"{_path}\\PROD.txt", $"{_path}\\PROD-NY.txt", $"{_path}\\PROD-NY-2.txt" }));
         }
     }
 }

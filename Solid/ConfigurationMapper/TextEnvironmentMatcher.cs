@@ -26,8 +26,6 @@ namespace Epam.NetMentoring.ConfigurationMapper
             {
                 pattern.Append($"({input}|)(-|)");
             }
-
-            pattern.Append(@"(\d*|)");
             return $"^{pattern}$";
         }
 

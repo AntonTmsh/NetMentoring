@@ -24,7 +24,7 @@ namespace ConfigurationMapper.Tests
         public void Match_MatchFileNamesTo2EnvironmentNames_GetCorrectNames()
         {
             var matcher = new TextEnvironmentMatcher();
-            var source = matcher.Match("PROD-NY-3", _prod_ny);
+            var source = matcher.Match("PROD-NY", _prod_ny);
             Assert.IsTrue(source);
         }
 

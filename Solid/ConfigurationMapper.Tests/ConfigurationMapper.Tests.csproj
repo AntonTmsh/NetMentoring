@@ -80,6 +80,9 @@
     <Content Include="Data\PROD-NY-3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\PROD-NY.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\PROD.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

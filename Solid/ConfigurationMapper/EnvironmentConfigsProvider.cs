@@ -39,14 +39,14 @@ namespace Epam.NetMentoring.ConfigurationMapper
                 throw new ArgumentException($"Empty {nameof(environmentNames)} do not allowed");
             }
 
-            var fullnames = Directory.GetFiles(_pathToConfigsFolder, $"*.{_extension}");
-            var names = GetFileNames(fullnames).ToList();
+            var fullnames = Directory.EnumerateFiles(_pathToConfigsFolder, $"*.{_extension}");
+            var names = GetFileNames(fullnames);
             if (!IsRequiredFileExist(names))
             {
                 throw new FileNotFoundException($"File {RequiredFile} must be exist in {_pathToConfigsFolder} folder");
             }
 
-            var matchedNames = names.Where(n => _environmentMatcher.Match(n, environmentNames)).OrderBy(x => x);
+            var matchedNames = names.Where(n => _environmentMatcher.Match(n, environmentNames));
             var defaultEnum = new[] { RequiredFile };
             var namesByTagsWithDefault = defaultEnum.Concat(matchedNames);
 

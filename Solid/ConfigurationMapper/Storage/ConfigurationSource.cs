@@ -14,13 +14,6 @@ namespace Epam.NetMentoring.ConfigurationMapper.Storage
             _source = new Dictionary<string, Dictionary<string, string>>();
         }
 
-        public ConfigurationSource(IEnumerable<ConfigParameter> configParams)
-        {
-            _source = new Dictionary<string, Dictionary<string, string>>();
-            foreach (var param in configParams)
-                Add(param);
-        }
-
         public string GetValue(string classNameWithNamespace, string parameterName)
         {
             string value = null;

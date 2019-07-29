@@ -1,1 +1,1 @@
-Epam.NetMentoring.ConfigurationTypes.ServiceSettings.Port=0
+Epam.NetMentoring.ConfigurationTypes.ServiceSettings.Port=4

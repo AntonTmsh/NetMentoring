@@ -1,0 +1,2 @@
+﻿Epam.NetMentoring.ConfigurationTypes.ServiceSettings.Port=3
+Epam.NetMentoring.ConfigurationTypes.ServiceSettings.ConnectionString=prodny/dba
