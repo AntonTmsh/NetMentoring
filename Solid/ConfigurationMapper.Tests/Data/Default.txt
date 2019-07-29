@@ -1,0 +1,4 @@
+﻿Epam.NetMentoring.ConfigurationTypes.ServiceSettings.ConnectionString=Default/dba
+Epam.NetMentoring.ConfigurationTypes.ServiceSettings.Port=1
+ServiceSettings.ConfigurationTypes.BatchSize=300
+Epam.NetMentoring.IT.ServiceSettings.Port=4563

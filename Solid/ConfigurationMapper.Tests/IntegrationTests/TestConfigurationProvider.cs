@@ -1,0 +1,46 @@
+﻿using Epam.NetMentoring.ConfigurationMapper;
+using Epam.NetMentoring.ConfigurationTypes;
+using NUnit.Framework;
+using System;
+
+namespace ConfigurationMapper.Tests.IntegrationTests
+{
+    [TestFixture]
+    public class TestConfigurationProvider
+    {
+        private readonly string _path = $"{AppDomain.CurrentDomain.BaseDirectory}\\Data";
+        private readonly string[] _EnvironmentTags = { "prod", "ny" };
+        private readonly string[] _EnvironmentTags2 = { "prod", "ny" ,"2"};
+        private readonly string[] _EnvironmentTags3 = { "prod", "ny", "4" };
+        [Test]
+        public void Get_CreateInstanceOfSpecifiedClassForEnvironment_CreatedInstanceWithCorrectConfiguration()
+        {
+            var csp = new ConfigurationReader(new EnvironmentConfigsProvider(_path));
+            var cp = new ConfigurationProvider(csp.Read(_EnvironmentTags));
+            var config = cp.Get<ServiceSettings>();
+            Assert.AreEqual(3, config.Port);
+            Assert.AreEqual("prodny/dba", config.ConnectionString);
+        }
+
+        [Test]
+        public void Get_CreateInstanceOfSpecifiedClassForEnvironment2_CreatedInstanceWithCorrectConfiguration()
+        {
+            var csp = new ConfigurationReader(new EnvironmentConfigsProvider(_path));
+            var cp = new ConfigurationProvider(csp.Read(_EnvironmentTags2));
+            var config = cp.Get<ServiceSettings>();
+            Assert.AreEqual(5, config.Port);
+            Assert.AreEqual("prodny/dba", config.ConnectionString);
+            Assert.AreEqual(2, config.BatchSize);
+        }
+        [Test]
+        public void Get_CreateInstanceOfSpecifiedClassForEnvironment3_CreatedInstanceWithCorrectConfiguration()
+        {
+            var csp = new ConfigurationReader(new EnvironmentConfigsProvider(_path));
+            var cp = new ConfigurationProvider(csp.Read(_EnvironmentTags3));
+            var config = cp.Get<ServiceSettings>();
+            Assert.AreEqual(3, config.Port);
+            Assert.AreEqual("prodny/dba", config.ConnectionString);
+        }
+
+    }
+}
