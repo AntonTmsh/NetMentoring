@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationFileSorter.cs" />
+    <Compile Include="Contracts\IConfigurationFileSorter.cs" />
     <Compile Include="Contracts\IEnvironmentMatcher.cs" />
     <Compile Include="EnvironmentConfigsProvider.cs" />
     <Compile Include="ConfigurationProvider.cs" />
@@ -54,8 +55,8 @@
     <Compile Include="Contracts\IEnvironmentConfigsProvider.cs" />
     <Compile Include="Contracts\IFileReader.cs" />
     <Compile Include="Contracts\IConfigurationSource.cs" />
-    <Compile Include="Contracts\IConfigurationReader.cs" />
-    <Compile Include="ConfigurationReader.cs" />
+    <Compile Include="Contracts\IConfigurationSourceManager.cs" />
+    <Compile Include="ConfigurationSourceManager.cs" />
     <Compile Include="Contracts\IConfigurationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\ConfigFileType.cs" />

@@ -4,24 +4,26 @@ using System.Collections.Generic;
 
 namespace Epam.NetMentoring.ConfigurationMapper
 {
-    public class ConfigurationReader : IConfigurationReader
+    public class ConfigurationSourceManager : IConfigurationSourceManager
     {
         private readonly IConfigurationSource _configurationSource;
         private readonly IFileReader _fileReader;
         private readonly IEnvironmentConfigsProvider _environmentConfigs;
         private readonly IConfigurationParser _configurationParser;
-        private readonly ConfigurationFileSorter _configurationFileSorter;
-        public ConfigurationReader(IEnvironmentConfigsProvider environmentConfigs, IConfigurationSource configurationSource = null, 
-                                                    IFileReader fileReader = null, IConfigurationParser configurationParser = null)
+        private readonly IConfigurationFileSorter _configurationFileSorter;
+        public ConfigurationSourceManager(IEnvironmentConfigsProvider environmentConfigs, IConfigurationFileSorter configurationFileSorter = null,
+                                                    IConfigurationSource configurationSource = null, IFileReader fileReader = null, 
+                                                    IConfigurationParser configurationParser = null)
+                                                    
         {
             _environmentConfigs = environmentConfigs;
             _configurationSource = configurationSource ?? new ConfigurationSource();
             _fileReader = fileReader ?? new FileReader();
             _configurationParser = configurationParser ?? new TextConfigParser();
-            _configurationFileSorter = new ConfigurationFileSorter();
+            _configurationFileSorter = configurationFileSorter ?? new ConfigurationFileSorter();
         }
 
-        public IConfigurationSource Read(IEnumerable<string> environmentNames)
+        public IConfigurationSource GetConfigSource(IEnumerable<string> environmentNames)
         {
             foreach (var path in _configurationFileSorter.Sort(_environmentConfigs.GetEnvironmentConfigFiles(environmentNames)))
             {

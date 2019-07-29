@@ -15,8 +15,8 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void Get_CreateInstanceOfSpecifiedClassForEnvironment_CreatedInstanceWithCorrectConfiguration()
         {
-            var csp = new ConfigurationReader(new EnvironmentConfigsProvider(_path));
-            var cp = new ConfigurationProvider(csp.Read(_EnvironmentTags));
+            var csp = new ConfigurationSourceManager(new EnvironmentConfigsProvider(_path));
+            var cp = new ConfigurationProvider(csp.GetConfigSource(_EnvironmentTags));
             var config = cp.Get<ServiceSettings>();
             Assert.AreEqual(3, config.Port);
             Assert.AreEqual("prodny/dba", config.ConnectionString);
@@ -25,8 +25,8 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void Get_CreateInstanceOfSpecifiedClassForEnvironment2_CreatedInstanceWithCorrectConfiguration()
         {
-            var csp = new ConfigurationReader(new EnvironmentConfigsProvider(_path));
-            var cp = new ConfigurationProvider(csp.Read(_EnvironmentTags2));
+            var csp = new ConfigurationSourceManager(new EnvironmentConfigsProvider(_path));
+            var cp = new ConfigurationProvider(csp.GetConfigSource(_EnvironmentTags2));
             var config = cp.Get<ServiceSettings>();
             Assert.AreEqual(5, config.Port);
             Assert.AreEqual("prodny/dba", config.ConnectionString);
@@ -35,8 +35,8 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void Get_CreateInstanceOfSpecifiedClassForEnvironment3_CreatedInstanceWithCorrectConfiguration()
         {
-            var csp = new ConfigurationReader(new EnvironmentConfigsProvider(_path));
-            var cp = new ConfigurationProvider(csp.Read(_EnvironmentTags3));
+            var csp = new ConfigurationSourceManager(new EnvironmentConfigsProvider(_path));
+            var cp = new ConfigurationProvider(csp.GetConfigSource(_EnvironmentTags3));
             var config = cp.Get<ServiceSettings>();
             Assert.AreEqual(3, config.Port);
             Assert.AreEqual("prodny/dba", config.ConnectionString);

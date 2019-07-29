@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Epam.NetMentoring.ConfigurationMapper.Contracts
 {
-    public interface IConfigurationReader
+    public interface IConfigurationSourceManager
     {
         /// <summary>
         /// Return a ConfigurationSource class.This class contains config info from configuration files.
@@ -13,6 +13,6 @@ namespace Epam.NetMentoring.ConfigurationMapper.Contracts
         /// <param name="environmentNames">Collection of environment names.It uses for an environment specification for getting configs</param>
         /// As example {{prod},{ny}} get configs like PROD,PROD-NY,PROD-NY-1 etc.
         /// <returns>ConfigurationSource class</returns>
-        IConfigurationSource Read(IEnumerable<string> environmentNames);
+        IConfigurationSource GetConfigSource(IEnumerable<string> environmentNames);
     }
 }
