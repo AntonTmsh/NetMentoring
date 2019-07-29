@@ -13,14 +13,14 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void GetEnvironmentConfigPaths_GetConfigPathsWithDefault_HavePathToDefaultOnFirst()
         {
-            var ecp = new EnvironmentConfigsProvider(_path);
+            var ecp = new TextEnvironmentConfigsProvider(_path);
             var paths= ecp.GetEnvironmentConfigFiles(_tags);
             Assert.AreEqual(paths.First(), $"{_path}\\Default.txt");
         }
         [Test]
         public void GetEnvironmentConfigPaths_GetConfigPathsForEnvTags_HaveOrderedPathForEnv()
         {
-            var ecp = new EnvironmentConfigsProvider(_path);
+            var ecp = new TextEnvironmentConfigsProvider(_path);
             var paths = ecp.GetEnvironmentConfigFiles(_tags);
             Assert.That(paths, Is.EquivalentTo(new[] { $"{_path}\\Default.txt", $"{_path}\\PROD.txt", $"{_path}\\PROD-NY.txt", $"{_path}\\PROD-NY-2.txt" }));
         }

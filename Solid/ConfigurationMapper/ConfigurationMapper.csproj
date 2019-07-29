@@ -48,10 +48,10 @@
     <Compile Include="ConfigurationFileSorter.cs" />
     <Compile Include="Contracts\IConfigurationFileSorter.cs" />
     <Compile Include="Contracts\IEnvironmentMatcher.cs" />
-    <Compile Include="EnvironmentConfigsProvider.cs" />
+    <Compile Include="TextEnvironmentConfigsProvider.cs" />
     <Compile Include="ConfigurationProvider.cs" />
     <Compile Include="Contracts\IConfigurationParser.cs" />
-    <Compile Include="FileReader.cs" />
+    <Compile Include="TextFileReader.cs" />
     <Compile Include="Contracts\IEnvironmentConfigsProvider.cs" />
     <Compile Include="Contracts\IFileReader.cs" />
     <Compile Include="Contracts\IConfigurationSource.cs" />

@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Epam.NetMentoring.ConfigurationMapper
 {
-    public class FileReader : IFileReader
+    public class TextFileReader : IFileReader
     {
         private const string CommentSymbol = "#";
         public IEnumerable<string> Read(string pathToConfigFile)

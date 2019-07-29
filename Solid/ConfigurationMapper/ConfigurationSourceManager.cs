@@ -11,16 +11,16 @@ namespace Epam.NetMentoring.ConfigurationMapper
         private readonly IEnvironmentConfigsProvider _environmentConfigs;
         private readonly IConfigurationParser _configurationParser;
         private readonly IConfigurationFileSorter _configurationFileSorter;
-        public ConfigurationSourceManager(IEnvironmentConfigsProvider environmentConfigs, IConfigurationFileSorter configurationFileSorter = null,
-                                                    IConfigurationSource configurationSource = null, IFileReader fileReader = null, 
-                                                    IConfigurationParser configurationParser = null)
+        public ConfigurationSourceManager(IEnvironmentConfigsProvider environmentConfigs, IConfigurationFileSorter configurationFileSorter,
+                                                    IConfigurationSource configurationSource, IFileReader fileReader, 
+                                                    IConfigurationParser configurationParser)
                                                     
         {
             _environmentConfigs = environmentConfigs;
-            _configurationSource = configurationSource ?? new ConfigurationSource();
-            _fileReader = fileReader ?? new FileReader();
-            _configurationParser = configurationParser ?? new TextConfigParser();
-            _configurationFileSorter = configurationFileSorter ?? new ConfigurationFileSorter();
+            _configurationSource = configurationSource;
+            _fileReader = fileReader;
+            _configurationParser = configurationParser;
+            _configurationFileSorter = configurationFileSorter;
         }
 
         public IConfigurationSource GetConfigSource(IEnumerable<string> environmentNames)

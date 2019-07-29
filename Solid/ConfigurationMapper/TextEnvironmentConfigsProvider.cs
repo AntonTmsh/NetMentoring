@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace Epam.NetMentoring.ConfigurationMapper
 {
-    public class EnvironmentConfigsProvider : IEnvironmentConfigsProvider
+    public class TextEnvironmentConfigsProvider : IEnvironmentConfigsProvider
     {
         private readonly IEnvironmentMatcher _environmentMatcher;
         private readonly string _pathToConfigsFolder;
         private readonly string _extension;
         private const string RequiredFile = "Default";
 
-        public EnvironmentConfigsProvider(string pathToConfigsFolder, ConfigFileType configFileType = ConfigFileType.txt, IEnvironmentMatcher environmentMatcher = null)
+        public TextEnvironmentConfigsProvider(string pathToConfigsFolder, ConfigFileType configFileType = ConfigFileType.txt, IEnvironmentMatcher environmentMatcher = null)
         {
             if (ValidateConfigsFolder(pathToConfigsFolder))
                 throw new ArgumentException(nameof(pathToConfigsFolder));

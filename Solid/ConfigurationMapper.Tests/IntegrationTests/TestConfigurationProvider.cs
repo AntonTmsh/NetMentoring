@@ -2,6 +2,7 @@
 using Epam.NetMentoring.ConfigurationTypes;
 using NUnit.Framework;
 using System;
+using Epam.NetMentoring.ConfigurationMapper.Storage;
 
 namespace ConfigurationMapper.Tests.IntegrationTests
 {
@@ -15,7 +16,8 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void Get_CreateInstanceOfSpecifiedClassForEnvironment_CreatedInstanceWithCorrectConfiguration()
         {
-            var csp = new ConfigurationSourceManager(new EnvironmentConfigsProvider(_path));
+            var csp = new ConfigurationSourceManager(new TextEnvironmentConfigsProvider(_path),new ConfigurationFileSorter(), 
+                                                        new ConfigurationSource(), new TextFileReader(), new TextConfigParser());
             var cp = new ConfigurationProvider(csp.GetConfigSource(_EnvironmentTags));
             var config = cp.Get<ServiceSettings>();
             Assert.AreEqual(3, config.Port);
@@ -25,7 +27,8 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void Get_CreateInstanceOfSpecifiedClassForEnvironment2_CreatedInstanceWithCorrectConfiguration()
         {
-            var csp = new ConfigurationSourceManager(new EnvironmentConfigsProvider(_path));
+            var csp = new ConfigurationSourceManager(new TextEnvironmentConfigsProvider(_path), new ConfigurationFileSorter(),
+                new ConfigurationSource(), new TextFileReader(), new TextConfigParser());
             var cp = new ConfigurationProvider(csp.GetConfigSource(_EnvironmentTags2));
             var config = cp.Get<ServiceSettings>();
             Assert.AreEqual(5, config.Port);
@@ -35,7 +38,8 @@ namespace ConfigurationMapper.Tests.IntegrationTests
         [Test]
         public void Get_CreateInstanceOfSpecifiedClassForEnvironment3_CreatedInstanceWithCorrectConfiguration()
         {
-            var csp = new ConfigurationSourceManager(new EnvironmentConfigsProvider(_path));
+            var csp = new ConfigurationSourceManager(new TextEnvironmentConfigsProvider(_path), new ConfigurationFileSorter(),
+                new ConfigurationSource(), new TextFileReader(), new TextConfigParser());
             var cp = new ConfigurationProvider(csp.GetConfigSource(_EnvironmentTags3));
             var config = cp.Get<ServiceSettings>();
             Assert.AreEqual(3, config.Port);
